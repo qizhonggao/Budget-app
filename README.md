@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/qizhonggao/Budget-app/branch/master/graph/badge.svg?token=H0ZLBE1T2O)](https://codecov.io/gh/qizhonggao/Budget-app)
+
 # Budget-App-JavaScript
 
 Welcome to the Budget App! This project is the result of following a comprehensive YouTube tutorial that guides you through building a budget management application from scratch. With this app, you can efficiently track your income, expenses, and overall budget, gaining better control of your financial situation.
@@ -46,3 +48,4 @@ The Budget App is released under the MIT License. You are free to use, modify, a
 If you have any questions, suggestions, or issues with the Budget App, feel free to reach out by creating an issue in the [GitHub repository]([url](https://github.com/aaramiss/Budget-app/issues)). We welcome any feedback to improve the app and make it even more useful for managing personal finances.
 
 Happy budgeting!
+
