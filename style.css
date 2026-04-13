@@ -435,3 +435,43 @@ input[type="number"] {
   background-size: 20px 20px;
   background-repeat: no-repeat;
 }
+
+/* ===== Contrast demo ===== */
+.contrast-demo {
+  padding: 16px 20px 0;
+}
+
+.contrast-demo-label {
+  margin: 0 0 12px;
+  font-family: "Gilroy Bold";
+  font-size: 0.95rem;
+  color: #1a0034;
+}
+
+.submit-btn {
+  min-width: 120px;
+  height: 44px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Gilroy Bold";
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* 故意做成 fail，方便你先跑 axe / Lighthouse */
+.submit-btn--fail {
+  background-color: #90EE90;
+  color: #FFFFFF;
+}
+
+/* 修复后的版本 */
+.submit-btn--pass {
+  background-color: #2D5A27;
+  color: #FFFFFF;
+}
+
+.submit-btn:focus-visible {
+  outline: 3px solid #1a0034;
+  outline-offset: 2px;
+}
