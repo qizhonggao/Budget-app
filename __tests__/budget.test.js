@@ -94,3 +94,53 @@ test("renders saved entries from localStorage on startup", () => {
   expect(document.querySelector("#income .list").textContent).toContain("Freelance");
   expect(document.querySelector("#all .list").textContent).toContain("Freelance");
 });
+
+
+test("adds and then deletes an expense entry, updating totals and localStorage", () => {
+  bootstrapApp();
+
+  document.getElementById("expense-title-input").value = "Rent";
+  document.getElementById("expense-amount-input").value = "500";
+  document.querySelector(".add-expense").click();
+
+  expect(document.querySelector(".outcome-total").textContent).toContain("500");
+  expect(document.querySelector(".balance .value").textContent).toContain("-$");
+  expect(document.querySelector(".balance .value").textContent).toContain("500");
+  expect(document.querySelector("#expense .list").textContent).toContain("Rent");
+  expect(JSON.parse(localStorage.getItem("entry_list"))).toEqual([
+    { type: "expense", title: "Rent", amount: 500 },
+  ]);
+
+  document.querySelector("#expense .list li #delete").click();
+
+  expect(document.querySelector("#expense .list").children.length).toBe(0);
+  expect(document.querySelector("#all .list").children.length).toBe(0);
+  expect(document.querySelector(".outcome-total").textContent).toContain("0");
+  expect(document.querySelector(".balance .value").textContent).toContain("0");
+  expect(JSON.parse(localStorage.getItem("entry_list"))).toEqual([]);
+  expect(global.updateChart).toHaveBeenLastCalledWith(0, 0);
+});
+
+test("clicking edit pre-fills the correct form and removes the original entry", () => {
+  bootstrapApp([{ type: "income", title: "Bonus", amount: 300 }]);
+
+  document.querySelector("#income .list li #edit").click();
+
+  expect(document.getElementById("income-title-input").value).toBe("Bonus");
+  expect(document.getElementById("income-amount-input").value).toBe("300");
+  expect(document.querySelector("#income .list").children.length).toBe(0);
+  expect(document.querySelector("#all .list").children.length).toBe(0);
+  expect(JSON.parse(localStorage.getItem("entry_list"))).toEqual([]);
+  expect(global.updateChart).toHaveBeenLastCalledWith(0, 0);
+
+  bootstrapApp([{ type: "expense", title: "Groceries", amount: 45 }]);
+
+  document.querySelector("#expense .list li #edit").click();
+
+  expect(document.getElementById("expense-title-input").value).toBe("Groceries");
+  expect(document.getElementById("expense-amount-input").value).toBe("45");
+  expect(document.querySelector("#expense .list").children.length).toBe(0);
+  expect(document.querySelector("#all .list").children.length).toBe(0);
+  expect(JSON.parse(localStorage.getItem("entry_list"))).toEqual([]);
+  expect(global.updateChart).toHaveBeenLastCalledWith(0, 0);
+});
